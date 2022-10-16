@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>数据绑定</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<!--
+1. Vue中常用的按键别名
+    回车  enter
+    删除   delete  删除和退格
+    退出   esc
+    空格  space
+    换行   tab
+    上 up
+    下 down
+    左 left
+    右 right
+2. Vue未提供别名的按键，可以使用按键原始的key值去绑定，但注意要转化kebab-cas
+3. 系统修饰符 ctrl alt  shif win
+    1. 配合keyup使用 按下修饰键的同时，再按下其他键，随后释放其他键，事件才被触发
+    2. 配合keydown使用：正常触发事件
+4. keycode 指定具体的按键【不推荐】
+
+5. Vue.config.keyCodes.自定义键名=键码 可以去定制按键别名
+-->
+<div id="app">
+<input type="text" placeholder="Enter" @keyup="showInfo" >
+<input type="text" placeholder="Enter.esc" @keyup.esc="showInfo" >
+<input type="text" placeholder="Enter.delete" @keyup.delete="showInfo" >
+<input type="text" placeholder="Enter null" @keyup="showInfo" >
+<!--    CapsLock e.key 要小写 - 线分割 -->
+<input type="text" placeholder="Enter caps-lock 大小写" @keyup.caps-lock="showInfo" ><br>
+<input type="text" placeholder="Enter tab" @keyup.tab="showInfo" >  <br>
+<input type="text" placeholder="Enter keyup contrl" @keyup.ctrl="showInfo" > <br>
+<input type="text" placeholder="Enter keydown contrl" @keydown.ctrl="showInfo" >
+<input type="text" placeholder="Enter keydown contrl +  y" @keydown.ctrl.y="showInfo" >
+</div>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            name: "123"
+        },
+        methods: {
+         showInfo(e) {
+             console.log(e.key,e.keyCode)
+             console.log(e.target.value)
+         }
+        }
+    })
+    console.log(vm)
+</script>
+</body>
+</html>

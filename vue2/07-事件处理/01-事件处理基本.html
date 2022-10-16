@@ -1,0 +1,152 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>数据绑定</title>
+    <style>
+        * {
+            margin-top: 20px;
+        }
+
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: peru;
+            overflow: auto;
+        }
+
+        li {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<!--
+事件基本使用
+
+1. 使用v-on:xxx 或@xxx 绑定事件，xxx是事件名
+2. 事件的回调需要配置methods对象 最终会在vm上
+3. methods中配置的函数 不要用箭头函数，否则 this就不是vm
+4. methods中配置的函数，都是被Vue管理的函数，this的指向是vm或者组件实例对象
+5. @click=‘demo’ 和 @click=“demo($event)” 效果一样，但后者可以传参
+
+事件修饰符号
+1. prevent 阻止默认事件
+2. stop 阻止事件冒泡
+3. once：事件只触发一次
+4. capture 使用事件的捕获模式
+5. self 只有event.target 是当前操作的元素时才触发事件
+6. passive 事件的默认行为立即执行，无需等待事件回调执行完毕
+
+-->
+<div id="app">
+    <h2>欢迎来到{{name}}</h2>
+    <button v-on:click="showInfo">click</button>
+    //简写形式是是是是是
+    <button @click="showInfo">click 不传参</button>
+    <button @click="showInfo2(1)">click</button>
+    <h3>如果需要使用event 使用$event</h3>
+    <button @click="showInfo2(1,$event)">click @event</button>
+
+    <a @click="showInfoPrevent" href="https://www.baidu.com">click showInfoPrevent @event</a>
+    <!--    事件修饰符-->
+    <a @click.prevent="showInfoPrevent" href="https://www.baidu.com">click showInfoPrevent @event</a>
+
+    <div class="demo1" @click="showAlertInfo">
+        <button @click="showAlertInfo">alert</button>
+    </div>
+
+
+    <div class="demo1" @click="showAlertInfo">
+        <button @click="showAlertInfo">alert event.stopPropagation() 阻止事件冒泡</button>
+    </div>
+
+    <div class="demo1" @click="showAlertInfo">
+        <button @click.stop="showAlertInfo">alert @click.stop 阻止事件冒泡</button>
+    </div>
+
+    <div class="demo1" @click="showAlertInfo">
+        <button @click.stop.capture="showAlertInfo">alert @click.stop.capture 阻止事件冒泡</button>
+    </div>
+
+    <!--    事件只触发一次-->
+    <button @click.once="showAlertInfo">alert @click.once 事件只触发一次</button>
+
+    <!--    capture 使用事件的捕获模式-->
+    <div class="demo1" style="background-color: red;padding: 5px" @click="showMsg(1)">
+        demo1
+        <div class="demo2" style="background-color: blue;padding: 5px" @click="showMsg(2)">
+            demo2
+        </div>
+    </div>
+    <!-- capture 先捕获再冒泡 -->
+    <div class="demo1" style="background-color: red;padding: 5px" @click.capture="showMsg(1)">
+        demo1.capture
+        <div class="demo2" style="background-color: blue;padding: 5px" @click="showMsg(2)">
+            demo2
+        </div>
+    </div>
+    <div class="demo1" @click.self="showInfo">
+        <button @click="showInfo">点击我</button>
+    </div>
+    <!--    passive 事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+    <!--    鼠标滚条 -->
+    <ul class="list" @scroll="demo">
+        <li></li>
+        <li></li>
+    </ul>
+    <!--    鼠标滚轮 -->
+    <ul class="list" @wheel="demo">
+        <li></li>
+        <li></li>
+    </ul>
+    <ul class="list" @wheel.passive="demo">
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            name: "123"
+        },
+        methods: {
+            showMsg(n) {
+                console.log(n)
+            },
+            showAlertInfo(e) {
+                e.stopPropagation()
+                alert('123')
+            },
+            showInfo(event) {
+                // console.log(this) // 此处的this是vm
+
+                console.log(event.target.innerText)
+            },
+            // 存在参数的函数
+            showInfo2(a, event) {
+                // console.log(this) // 此处的this是vm
+                console.log(event)
+                console.log(event.target.innerHTML)
+                console.log(a)
+            },
+            // showInfo:(event) => {
+            //     // console.log(this) // 此处的this不是vm
+            //     console.log(event.target.innerText)
+            // }
+            showInfoPrevent(e) {
+                alert("wahaha")
+            },
+            demo(){
+                for (let i = 0; i < 100000; i++) {
+                    console.log('#')
+                }
+                console.log('@')
+            }
+        }
+    })
+    console.log(vm)
+</script>
+</body>
+</html>
