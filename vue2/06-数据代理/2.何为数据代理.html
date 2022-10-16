@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+        <title>何为数据代理</title>
+    </head>
+    <body>
+        <!-- 数据代理： 通过一个对象对另外一个对象中属性的操作 -->
+        <div id="app">
+        </div>
+        <script>
+            let obj ={x:100}
+            let obj2 = {y:200}
+            Object.defineProperty(obj2,'x',{
+                get(){
+                    return obj.x
+                },
+                set(value){
+                    return obj.x=value
+                }
+            })
+          </script>
+    </body>
+</html>

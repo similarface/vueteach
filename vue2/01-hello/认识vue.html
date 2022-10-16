@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    </head>
+    <body>
+        <!--
+            Vue2:
+            1. Vue工作，必须创建一个Vue实例，且传入一个配置对象
+            2. root容器的代码依然符合html规范，只不过混入一些特殊的Vue语法
+            3. root容器的代码被称为【Vue模版】
+            4. vue实例和容器 一一对应
+            5. 真实开发中只有一个vue实例，并且会配合组件一起使用
+            6. {{xx}} 中的xx是js表达式
+            7. data中的数据发生变化，模版中用到该数据的地方也会自动更新
+        -->
+        <div id="app">{{ message }}</div>
+        <script>
+            Vue.config.productionTip=false
+            new Vue({
+                el: "#app",
+                data: {
+                    message:"hello world"
+                }
+            })
+          </script>
+    </body>
+</html>

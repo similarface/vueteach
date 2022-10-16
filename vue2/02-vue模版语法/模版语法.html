@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+        <title>模版语法</title>
+    </head>
+    <body>
+        <!--
+            Vue 模版语法有2大类：
+
+            1. 插值语法：
+            功能： 用于解析标签体的内容
+            写法：{{ xxx}} xxx是 js表达式,且可以直接读取到data的所有属性
+            2. 指令语法：
+            功能：用于解析标签【包括： 标签属性、标签体内容、绑定事件。。。】
+            e.g.   v-bind:href="xxx" 简写： :href="xxx" xxx同样要写js表达式 且可以直接读取到data的所有属性
+
+
+        -->
+        <div id="app">
+            <h1>插值语法</h1>
+            <h3>Hello,{{name}}</h3>
+            <hr>
+            <h1>指令语法</h1>
+            <a :href="url">Go to baidu</a><span> Use `:`</span> <br>    
+            <a v-bind:href="url.toUpperCase()">Go to baidu</a><span> Use `v-bind:`</span>
+            <hr>
+        </div>
+        <script>
+            new Vue({
+                el: "#app",
+                data: {
+                    name:'world',
+                    url:'http://www.baidu.com'
+                }
+            })
+          </script>
+    </body>
+</html>
