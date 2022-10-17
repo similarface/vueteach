@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+        <title>数据绑定</title>
+    </head>
+    <body>
+
+        <div id="app">
+        <h2>weather ... {{info}}</h2>
+        <button @click="changeWeather">change weather</button>
+        <button @click="isHot=!isHot">change weather @click="isHot=!isHot"</button>
+        </div>
+        <script>
+            new Vue({
+                "el":"#app",
+                "data":{
+                    firstName:"zhang",
+                    lastName:"san",
+                    isHot: true
+                },
+                computed: {
+                    info() {
+                        return this.isHot ? 'hot' : 'cool'
+                    }
+                },
+                methods: {
+                    changeWeather() {
+                        this.isHot = !this.isHot
+                    }
+                },
+                watch: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

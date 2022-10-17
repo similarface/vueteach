@@ -1,0 +1,111 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>监视属性</title>
+</head>
+<body>
+
+<div id="app">
+    <!--
+    深度检测：
+    watch deep 默认为false
+
+    watch 可以异步计算
+
+    两个重要的小原则
+
+    1. 被vue管理的函数最好写成普通函数
+    2. 所有不能被vue管理的函数（定时器的回调函数，ajax的回调函数等，promise）最好写成箭头函数
+    -->
+    <h2>weather ... {{info}}</h2>
+    <button @click="changeWeather">change weather</button>
+    <button @click="isHot=!isHot">change weather @click="isHot=!isHot"</button>
+    <button @click="isHot2=!isHot2">change weather @click="isHot2=!isHot2"</button>
+    <br>
+
+    <button @click="numbers.a++">a++</button>
+    <button @click="numbers.b++">b++</button>
+    <p>a: {{numbers.a}}</p>
+    <p>b: {{numbers.b}}</p>
+    姓<input type="text" v-model="firstName"> <br>
+    名<input type="text" v-model="lastName"> <br>
+    <p>{{fullName}}</p>
+</div>
+<script>
+    const vm = new Vue({
+        "el": "#app",
+        "data": {
+            firstName: "zhang",
+            lastName: "san",
+            fullName: '123',
+            isHot: true,
+            isHot2: true,
+            numbers: {
+                a: 1,
+                b: 1
+            },
+            simple: 1
+        },
+        computed: {
+            info() {
+                return this.isHot ? 'hot' : 'cool'
+            }
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot
+            }
+        },
+        watch: {
+            info: {
+                immediate: true, // 初始化让handel执行 调用一下
+                handler(newValue, oldValue) {
+                    console.log('fix isHot')
+                }
+            },
+            isHot: {
+                immediate: true, // 初始化让handel执行 调用一下
+                handler(newValue, oldValue) {
+                    console.log('fix isHot')
+                }
+            },
+            'numbers.a': {
+                handler() {
+                    console.log("fix numbers a")
+                }
+            },
+            numbers: {
+                deep: true, // 深度检测
+                handler() {
+                    console.log("fix numbers")
+                }
+            },
+            simple(newValue, oldValue) {
+                console.log("jianxie ...")
+            },
+            firstName(val) {
+                setTimeout(() => {
+                    this.fullName = val + '-' + this.lastName
+                }, 1000);
+            },
+            lastName(val) {
+                setTimeout(() => {
+                    this.fullName = this.firstName + '-' + val
+                }, 1000)
+            }
+        }
+    })
+    vm.$watch('isHot2', {
+        immediate: true, // 初始化让handel执行 调用一下
+        handler(newValue, oldValue) {
+            console.log('fix isHot2')
+        }
+    })
+    // 简写
+    vm.$watch('simple', function (newValue, oldValue) {
+        console.log(newValue, oldValue)
+    })
+</script>
+</body>
+</html>
