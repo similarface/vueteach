@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>组件 基本使用</title>
+</head>
+<body>
+<div id="app">
+    <!--    <h2>学校名称： {{schoolName}}</h2>-->
+    <!--    <h2>学校地址： {{school.address}}</h2>-->
+    <!--    <hr>-->
+    <!--    <h2>学生： {{studentName}}</h2>-->
+    <!--    <h2>学生地址：{{age}}</h2>-->
+    <school></school>
+    <student></student>
+</div>
+<script>
+    // 创建school对象
+    var school = Vue.extend({
+            template: `
+              <div>
+              <h2>{{ schoolName }}</h2>
+              <h2>{{ address }}</h2>
+              </div>
+            `,
+            data() {
+                return {
+                    schoolName: 'S1',
+                    address: 'ChengduDu TianFu'
+                }
+            }
+        }
+    )
+
+    // 创建student 组件
+    const student = Vue.extend({
+            template: `
+              <div>
+              <h2>{{ studentName }}</h2>
+              <h2>{{ age }}</h2>
+              </div>
+            `,
+            data() {
+                return {
+                    studentName: 'LiSI',
+                    age: 18
+                }
+            }
+        }
+    )
+
+    // 创建 vm
+    new Vue({
+            "el": "#app",
+            components: {
+                school,
+                student
+            }
+        }
+    )
+</script>
+</body>
+</html>
