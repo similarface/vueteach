@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>组件 基本使用</title>
+</head>
+<body>
+<!--
+    几个注意点：
+    1. 关于组件名称
+        一个单词组成：
+            第一种写法(首字母小写)school
+            第二种写法(首字母大写）School
+        多个单词组成
+            第一种写法 kebab-case my-school
+            第二种写法 CamelCase： MySchool
+        备注： a. 组件名称不要使用html中存在的元素名称
+              b. 可以使用name配置指定组件再开发者工具中呈现的名字
+    2. 关于组件标签
+        第一种写法： <school></school>
+        第二中写法： <school/>
+        备注： 不使用脚手架时候，<school/> 会导致不能渲染
+    3. 一个简写方式：
+       const school = Vue.extend(options) 可以简写 const school = options
+-->
+
+<div id="app">
+    <h2>{{msg}}</h2>
+    <hr>
+    <school></school>
+    <my-school></my-school>
+</div>
+<script>
+    const school = Vue.extend({
+        template: `
+        <div>
+            <h2>{{schoolName}}</h2>
+            <h2>{{address}}</h2>
+        </div>
+        `,
+        data() {
+            return {
+                schoolName: 'Xiao6',
+                address: 'XXX'
+            }
+        }
+    })
+    const school2 = Vue.extend({
+        name: "myname",
+        template: `
+        <div>
+            <h2>{{schoolName}}</h2>
+            <h2>{{address}}</h2>
+        </div>
+        `,
+        data() {
+            return {
+                schoolName: 'Xiao6',
+                address: 'XXX'
+            }
+        }
+    })
+    new Vue({
+        "el": "#app",
+        data: {
+            msg: '欢迎使用Vue'
+        },
+        components: {
+            school,
+            'my-school': school2
+        }
+    })
+</script>
+</body>
+</html>
