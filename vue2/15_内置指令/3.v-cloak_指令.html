@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>V-cloak指令</title>
+</head>
+<body>
+<!--
+v-cloak指令：
+js未准备好，未经过允许的模板在页面上显示
+-->
+<div id="app">
+    <h2 v-pre>Vue</h2>
+    <h2 v-once> Current value: {{n}}</h2>
+    <h2 > Current value: {{n}}</h2>
+    <button @click="n++">N++</button>
+</div>
+<script>
+    const vm = new Vue({
+        "el": "#app",
+        "data": {
+            n:1
+        },
+    })
+</script>
+</body>
+</html>

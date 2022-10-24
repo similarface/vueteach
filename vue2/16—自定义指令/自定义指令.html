@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    n <span v-text="n"></span> <br>
+    10*n <span v-big2="n"></span> <br>
+    <button @click="n++">n++</button>
+    <br>
+</div>
+<script>
+    const vm = new Vue({
+        "el": "#app",
+        "data": {
+            n: 1
+        },
+        directives: {
+            big: {},
+            // big函数 何时被调用
+            //  1. 指定与元素成功绑定时候
+            //  2. 指令所在模板重新解析
+            big2(element, binding) {
+                element.innerText = binding.value * 10
+                console.log(element, binding.value)
+            }
+        }
+    })
+</script>
+</body>
+</html>

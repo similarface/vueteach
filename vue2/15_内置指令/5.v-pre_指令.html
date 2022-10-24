@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>V-PRE指令</title>
+</head>
+<body>
+<!--
+v-pre指令：
+1. 跳过其所在节点的编译过程
+2. 可利用它跳过： 没有使用指令语法，没有使用插值 语法的节点，加快编译。
+-->
+<div id="app">
+    <h2 v-pre>Vue</h2>
+    <h2> Current value: {{n}}</h2>
+    <button @click="n++">N++</button>
+</div>
+<script>
+    const vm = new Vue({
+        "el": "#app",
+        "data": {
+            n:1
+        },
+    })
+</script>
+</body>
+</html>
