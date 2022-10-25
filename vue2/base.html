@@ -1,0 +1,84 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src=""></script>
+    <title>组件 基本使用</title>
+</head>
+<body>
+<div id="app">
+</div>
+<script>
+    const teacher = Vue.extend({
+        template: `
+          <div>
+          <h2>老师姓名：{{ name }}</h2>
+          <h2>老师年龄{{ age }}</h2>
+          </div>`,
+        data() {
+            return {
+                name: 'LiSi',
+                age: 20
+            }
+        }
+    })
+    const school = Vue.extend({
+        template: `
+          <div>
+          <h2>学校名称：{{ name }}</h2>
+          <h2>学校地址：{{ address }}</h2>
+          <hr>
+          <teacher></teacher>
+          </div>`,
+        data() {
+            return {
+                name: 'X0001',
+                address: '66666P01'
+            }
+        },
+        components: {
+            teacher
+        }
+
+    })
+
+    const hello = {
+        template: `
+          <div>
+          <h1>Hi,{{ msg }}</h1>
+          </div>
+        `,
+        data() {
+            return {
+                msg: "World"
+            }
+        }
+    }
+
+    //定义app组件
+    const app = {
+        template: `
+          <div>
+            <hello></hello>
+           <school></school>
+          </div>
+        `,
+        components: {
+            school,
+            hello
+        }
+    }
+    new Vue({
+        "el": "#app",
+        "data": {},
+        template: `
+        <div>
+          <app></app>
+        </div>
+        `
+        components: {
+            app
+        }
+    })
+</script>
+</body>
+</html>

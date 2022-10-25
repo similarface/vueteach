@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>一个重要的内置关系</title>
+</head>
+<body>
+<!--
+vm  存在el ，data可以不为函数
+vc
+
+1. 一个重要的
+VueComponent instance .__proto__ === Vue.prototype
+让组件实例对象（vc）可以访问Vue原型上的属性、方法
+-->
+<div id="app">
+</div>
+<script>
+    function Demo(){
+        this.a = 1
+        this.b =2
+    }
+
+    const  d= new Demo()
+
+    console.log(Demo.prototype) //显示原型对象
+    console.log(d.__proto__) //隐私原型对象
+
+    Demo.prototype.x = 99
+
+    console.log(d.__proto__.x)
+
+</script>
+</body>
+</html>
