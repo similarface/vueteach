@@ -1,2 +1,6 @@
 .idea
 .idea/*
+
+cli-vue2/node_modules
+cli-vue2/node_modules/
+cli-vue2/node_modules/*
