@@ -1,15 +1,15 @@
 <template>
   <!--  组件结构-->
-  <div>
-    <h1>{{ msg }}</h1>
+  <div class="demo">
     <h2>学生名称：{{ name }}</h2>
-    <input type="text" v-fbind:value="name">
-    <button @click="test">Hello</button>
+    <h2>学生性别：{{ sex }}</h2>
+    <button @click="sendStudentName">sendStudentName</button>
     <hr>
   </div>
 </template>
 
 <script>
+import pubsub from 'pubsub-js'
 export default {
   name: 'Student',
   data() {
@@ -22,14 +22,19 @@ export default {
   methods: {
     test(){
       this.hello()
+    },
+    sendStudentName(){
+      console.log(this.name)
+      // this.$bus.$emit('hello',this.name)
+      pubsub.publish('hello',666)
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 /* 组件样式 */
 .demo {
-  background-color: green;
+  background-color: red;
 }
 </style>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="saveData()">saveData</button>
+<button onclick="readData()">readData</button>
+<button onclick="removeData()">removeData</button>
+<button onclick="clearData()">clearData</button>
+
+<script type="text/javascript">
+    let p = {name:'zs',age:20}
+    function saveData(){
+        localStorage.setItem('msg','hello!')
+        localStorage.setItem('msg2',666)
+        localStorage.setItem('p',JSON.stringify(p))
+    }
+    function  readData(){
+        console.log(localStorage.getItem('msg'))
+        console.log(localStorage.getItem('msg2'))
+        const result = localStorage.getItem('p')
+        console.log(JSON.parse(result))
+    }
+    function removeData(){
+        localStorage.removeItem('msg')
+        localStorage.removeItem('msg2')
+        localStorage.removeItem('p')
+    }
+    function clearData(){
+        localStorage.clear()
+    }
+</script>
+</body>
+</html>
